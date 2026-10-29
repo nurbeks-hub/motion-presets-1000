@@ -1,0 +1,4 @@
+.claude/
+media/*.keyed
+media/*.tmp.mp4
+.DS_Store

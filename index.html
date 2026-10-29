@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion Library 1000</title>
+<meta name="description" content="1000 motion-graphics presets in 125 packs across 19 categories: lower thirds, titles, logo reveals, transitions, video displays, backgrounds, social, captions and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b0d;--panel:#141418;--panel2:#1b1b21;--line:#26262e;--text:#f3f2ee;--mute:#9a99a3;--acc:#ff5a1f;--acc2:#c8ff3d;--r:14px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:15px/1.45 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img,video{display:block;width:100%}
+/* ---------- top bar ---------- */
+.top{position:sticky;top:0;z-index:40;background:rgba(11,11,13,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{max-width:1560px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:16px}
+.logo{font-weight:900;letter-spacing:-.02em;font-size:18px;white-space:nowrap}.logo b{color:var(--acc)}
+.search{flex:1;max-width:460px;position:relative}
+.search input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 16px 9px 38px;color:var(--text);font:inherit;outline:none}
+.search input:focus{border-color:#4a4a55}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.5}
+.seg{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{padding:6px 13px;border-radius:999px;font-size:13px;color:var(--mute);white-space:nowrap}
+.seg button.on{background:var(--text);color:#111}
+.spacer{flex:1}
+.cats{max-width:1560px;margin:0 auto;padding:0 24px 12px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 13px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--mute);white-space:nowrap;transition:.15s}
+.chip:hover{color:var(--text);border-color:#44444e}.chip.on{background:var(--acc);border-color:var(--acc);color:#111;font-weight:600}
+.chip i{font-style:normal;opacity:.6;margin-left:6px}
+/* ---------- hero ---------- */
+.hero{position:relative;height:min(78vh,760px);overflow:hidden;border-bottom:1px solid var(--line)}
+.wall{position:absolute;inset:-40px 0;display:flex;flex-direction:column;gap:12px;transform:rotate(-4deg) scale(1.08)}
+.row{display:flex;gap:12px;width:max-content;animation:slide 90s linear infinite}
+.row:nth-child(2){animation-duration:120s;animation-direction:reverse}.row:nth-child(3){animation-duration:105s}
+.row .t{width:300px;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:var(--panel);flex:none}
+.row .t.v{width:150px;aspect-ratio:9/16}
+.row .t video,.row .t img{height:100%;object-fit:cover}
+@keyframes slide{to{transform:translateX(-50%)}}
+.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(11,11,13,.86),rgba(11,11,13,.35) 60%,rgba(11,11,13,.75)),linear-gradient(to top,var(--bg),transparent 40%)}
+.hcopy{position:absolute;z-index:2;left:0;right:0;bottom:56px;max-width:1560px;margin:0 auto;padding:0 24px}
+.kick{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--acc2);font-weight:600}
+.h1{font-weight:900;font-size:clamp(44px,8vw,120px);line-height:.92;letter-spacing:-.04em;margin:14px 0 18px}
+.h1 em{font-family:"Instrument Serif",serif;font-weight:400;font-style:italic;letter-spacing:-.01em;color:var(--acc)}
+.lead{max-width:640px;color:#cfcdd6;font-size:17px}
+.stats{display:flex;gap:34px;margin-top:26px;flex-wrap:wrap}
+.stats div{font-size:13px;color:var(--mute)}.stats b{display:block;font-size:32px;color:var(--text);font-weight:800;letter-spacing:-.02em}
+/* ---------- sections ---------- */
+main{max-width:1560px;margin:0 auto;padding:30px 24px 120px}
+.sec{padding-top:46px;scroll-margin-top:118px}
+.sech{display:flex;align-items:baseline;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.sech h2{font-size:28px;font-weight:800;letter-spacing:-.02em}
+.sech .ru{font-family:"Instrument Serif",serif;font-style:italic;font-size:22px;color:var(--mute)}
+.sech .n{margin-left:auto;font-size:13px;color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:#3c3c46}
+.media{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+.media img,.media video{position:absolute;inset:0;height:100%;object-fit:cover}
+.media video{opacity:0;transition:opacity .25s}.card.play .media video{opacity:1}
+.media .vid{object-fit:contain;background:#000}
+.badge{position:absolute;right:10px;bottom:10px;z-index:2;font-size:11px;font-weight:600;letter-spacing:.06em;padding:4px 8px;border-radius:6px;background:rgba(0,0,0,.6);backdrop-filter:blur(6px)}
+.meta{padding:12px 14px 14px}
+.meta .w{font-family:"Instrument Serif",serif;font-style:italic;font-size:18px;color:var(--mute);line-height:1}
+.meta .tt{font-weight:800;font-size:17px;letter-spacing:-.01em;margin-top:2px}
+.meta .row2{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:12px;color:var(--mute)}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;grid-auto-flow:dense}
+.pc{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;position:relative}
+.pc.h{grid-column:span 2}
+.pc .media{aspect-ratio:9/16}.pc.h .media{aspect-ratio:4/3}
+.pc .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 8px;font-size:12px;background:linear-gradient(transparent,rgba(0,0,0,.85));z-index:2}
+.pc .cap b{display:block;font-size:13px}
+.empty{color:var(--mute);padding:60px 0;text-align:center}
+/* ---------- viewer ---------- */
+.ov{position:fixed;inset:0;z-index:80;background:rgba(5,5,7,.86);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:24px}
+.ov.on{display:flex}
+.vw{width:min(1400px,100%);max-height:100%;display:grid;grid-template-columns:minmax(0,1fr) 380px;background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.stage{background:#000;display:flex;align-items:center;justify-content:center;min-height:420px;max-height:86vh;position:relative}
+.stage video{max-height:86vh;width:auto;max-width:100%}
+.side{padding:22px;overflow-y:auto;max-height:86vh;display:flex;flex-direction:column;gap:16px}
+.side .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);font-weight:600}
+.side h3{font-size:30px;font-weight:900;letter-spacing:-.03em;line-height:1}
+.side .w{font-family:"Instrument Serif",serif;font-style:italic;font-size:24px;color:var(--mute)}
+.side p{color:#cfcdd6;font-size:14px}
+.lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:8px}
+.slots{display:flex;flex-wrap:wrap;gap:6px}.slots span{font-size:12px;padding:4px 9px;border-radius:6px;background:var(--panel2);border:1px solid var(--line)}
+.vars{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.vars button{border-radius:8px;overflow:hidden;border:2px solid transparent;position:relative;aspect-ratio:1;background:#000}
+.vars button img{height:100%;object-fit:cover}
+.vars button.on{border-color:var(--acc)}
+.vars button span{position:absolute;right:4px;bottom:3px;font-size:10px;font-weight:700;background:rgba(0,0,0,.65);padding:1px 4px;border-radius:4px}
+.code{font:12px/1.4 ui-monospace,Menlo,monospace;color:var(--mute)}
+.nav{display:flex;gap:8px;margin-top:auto}.nav button{flex:1;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:13px}.nav button:hover{background:var(--panel2)}
+.x{position:absolute;right:14px;top:12px;z-index:3;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.6);font-size:20px}
+footer{border-top:1px solid var(--line);color:var(--mute);font-size:13px;padding:28px 24px;text-align:center}
+@media (max-width:900px){.vw{grid-template-columns:1fr}.side{max-height:none}.stage{min-height:260px}.bar{flex-wrap:wrap}.search{order:3;max-width:none;flex-basis:100%}.grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}.pc.h{grid-column:span 2}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <a class="logo" href="#top">MOTION<b>/</b>1000</a>
+    <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" placeholder="Search: glass, ticker, polaroid, LT04…" autocomplete="off"></label>
+    <div class="spacer"></div>
+    <div class="seg" id="asp"><button data-a="" class="on">All</button><button data-a="H">4:3</button><button data-a="V">9:16</button></div>
+    <div class="seg" id="mode"><button data-m="packs" class="on">Packs</button><button data-m="presets">All presets</button></div>
+  </div>
+  <nav class="cats" id="cats"></nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="wall" id="wall"><div class="row"></div><div class="row"></div><div class="row"></div></div>
+  <div class="hcopy">
+    <div class="kick">Motion graphics library · built in code</div>
+    <div class="h1">1000 presets.<br><em>All our own.</em></div>
+    <p class="lead">Lower thirds, titles, logo reveals, transitions, screens, backgrounds, social, captions and more. Every preset is a parametric code engine: text, colours, footage and logo are editable slots. Original designs, OFL fonts, own footage.</p>
+    <div class="stats" id="stats"></div>
+  </div>
+</section>
+
+<main id="main"></main>
+<footer>Motion Library 1000 · 125 packs · 19 categories · previews are 480p web encodes of 1080p finals · silent templates</footer>
+
+<div class="ov" id="ov">
+  <div class="vw" id="vw">
+    <div class="stage"><button class="x" id="x" aria-label="Close">×</button><video id="pv" playsinline muted loop autoplay controls></video></div>
+    <aside class="side" id="side"></aside>
+  </div>
+</div>
+
+<script>
+const esc = t => t.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const PAL = {"ink-signal":"#FF5A1F","paper-cobalt":"#2B50FF","moss-cream":"#B8D86B","plum-peach":"#FF9C7A","slate-lime":"#C8FF3D","navy-gold":"#E8B64C","bone-red":"#E0352B","teal-sand":"#5FE0C8","char-pink":"#FF4FA3","sky-ink":"#5AB4FF","clay-white":"#FFB18A","mono-white":"#FFFFFF","violet-mint":"#7CF2C2","rust-cream":"#E2702F","olive-sun":"#FFD23F","steel-cyan":"#00D1FF","wine-blush":"#FF6F8E","forest-coral":"#FF7A5C","sand-black":"#E7DCC8","cobalt-white":"#1838C8","tangerine":"#FF8A00","ice-navy":"#0E66FF","graphite-acid":"#E6FF00","rose-ink":"#E8A0B4"};
+let D, state = {cat:"", asp:"", q:"", mode:"packs"};
+
+fetch("data.json").then(r => r.json()).then(d => { D = d; d.packs.forEach((p, i) => p.i = i); init(); });
+
+function init(){
+  const total = D.packs.reduce((a, p) => a + p.variants.length, 0);
+  $("#stats").innerHTML = `<div><b>${total}</b>presets</div><div><b>${D.packs.length}</b>packs</div><div><b>${D.categories.length}</b>categories</div><div><b>4:3 + 9:16</b>formats</div>`;
+  $("#cats").innerHTML = `<button class="chip on" data-c="">All<i>${total}</i></button>` + D.categories.map(c => `<button class="chip" data-c="${c.slug}">${c.en}<i>${c.presets}</i></button>`).join("");
+  $("#cats").onclick = e => { const b = e.target.closest(".chip"); if(!b) return; state.cat = b.dataset.c; $$(".chip").forEach(x => x.classList.toggle("on", x === b)); render(); window.scrollTo({top: $("#main").offsetTop - 120, behavior:"smooth"}); };
+  $("#asp").onclick = e => { const b = e.target.closest("button"); if(!b) return; state.asp = b.dataset.a; $$("#asp button").forEach(x => x.classList.toggle("on", x === b)); render(); };
+  $("#mode").onclick = e => { const b = e.target.closest("button"); if(!b) return; state.mode = b.dataset.m; $$("#mode button").forEach(x => x.classList.toggle("on", x === b)); render(); };
+  let t; $("#q").oninput = e => { clearTimeout(t); t = setTimeout(() => { state.q = e.target.value.trim().toLowerCase(); render(); }, 150); };
+  wall(); render(); route();
+  window.addEventListener("hashchange", route);
+}
+
+function wall(){
+  // one variant from many packs, shuffled, 3 rows; videos only start when the hero is visible
+  const pick = D.packs.map(p => p.variants[(p.i * 7) % p.variants.length]).sort((a, b) => (a.id * 37 % 101) - (b.id * 37 % 101)).slice(0, 36);
+  const rows = $$("#wall .row");
+  rows.forEach((r, k) => { const items = pick.slice(k * 12, k * 12 + 12); const html = items.map(v => `<div class="t ${v.aspect === 'V' ? 'v' : ''}"><video muted loop playsinline preload="none" poster="${v.poster}" data-src="${v.video}"></video></div>`).join(""); r.innerHTML = html + html; });
+  const io = new IntersectionObserver(es => es.forEach(en => { const v = en.target; if(en.isIntersecting){ if(!v.src) v.src = v.dataset.src; v.play().catch(()=>{}); } else v.pause(); }), {rootMargin:"0px"});
+  $$("#wall video").forEach(v => io.observe(v));
+}
+
+function match(p, v){
+  if(state.cat && p.category !== state.cat) return false;
+  if(state.asp && v && v.aspect !== state.asp) return false;
+  if(!state.q) return true;
+  const hay = (p.id + " " + p.word + " " + p.title + " " + p.category + " " + p.what + " " + (v ? v.code + " " + v.palette : p.variants.map(x => x.code).join(" "))).toLowerCase();
+  return state.q.split(/\s+/).every(w => hay.includes(w));
+}
+
+function render(){
+  const m = $("#main"); let html = "";
+  for(const c of D.categories){
+    if(state.cat && c.slug !== state.cat) continue;
+    const packs = D.packs.filter(p => p.category === c.slug);
+    if(state.mode === "packs"){
+      const ps = packs.filter(p => match(p) && (!state.asp || p.variants.some(v => v.aspect === state.asp)));
+      if(!ps.length) continue;
+      html += `<section class="sec" id="cat-${c.slug}"><div class="sech"><h2>${c.en}</h2><span class="ru">${c.ru}</span><span class="n">${ps.length} packs · ${ps.reduce((a, p) => a + p.variants.length, 0)} presets</span></div><div class="grid">` +
+        ps.map(p => { const v = p.variants.find(x => !state.asp || x.aspect === state.asp) || p.variants[0]; const asps = [...new Set(p.variants.map(x => x.aspect === "H" ? "4:3" : "9:16"))].join(" + ");
+          return `<article class="card" data-p="${p.i}" data-v="${v.video}"><div class="media"><span class="badge">${p.id}</span><img loading="lazy" src="${p.cover}" alt="${p.title}"><video class="vid" muted loop playsinline preload="none"></video></div>
+          <div class="meta"><div class="w">${p.word}</div><div class="tt">${p.title}</div><div class="row2"><span>${p.variants.length} variants</span>·<span>${asps}</span><span style="margin-left:auto;display:flex;gap:4px">${[...new Set(p.variants.map(x => x.palette))].slice(0, 4).map(k => `<span class="dot" style="background:${PAL[k] || '#888'}"></span>`).join("")}</span></div></div></article>`; }).join("") + `</div></section>`;
+    } else {
+      const vs = []; packs.forEach(p => p.variants.forEach((v, k) => { if(match(p, v)) vs.push([p, v, k]); }));
+      if(!vs.length) continue;
+      html += `<section class="sec" id="cat-${c.slug}"><div class="sech"><h2>${c.en}</h2><span class="ru">${c.ru}</span><span class="n">${vs.length} presets</span></div><div class="pgrid">` +
+        vs.map(([p, v, k]) => `<article class="pc card ${v.aspect === 'H' ? 'h' : ''}" data-p="${p.i}" data-k="${k}" data-v="${v.video}"><div class="media"><img loading="lazy" src="${v.poster}" alt="${v.code}"><video muted loop playsinline preload="none"></video></div><div class="cap"><b>${v.code}</b>${p.title}</div></article>`).join("") + `</div></section>`;
+    }
+  }
+  m.innerHTML = html || `<div class="empty">Nothing matches “${state.q}”.</div>`;
+  hover();
+}
+
+function hover(){
+  $$("#main .card").forEach(c => {
+    const v = c.querySelector("video");
+    c.onmouseenter = () => { if(!v.src) v.src = c.dataset.v; v.play().then(() => c.classList.add("play")).catch(()=>{}); };
+    c.onmouseleave = () => { v.pause(); c.classList.remove("play"); };
+    c.onclick = () => { const p = D.packs[+c.dataset.p]; location.hash = p.id + (c.dataset.k ? "-" + String(+c.dataset.k + 1).padStart(2, "0") : ""); };
+  });
+}
+
+function route(){
+  const h = decodeURIComponent(location.hash.slice(1)); const m = h.match(/^([A-Z]{2}\d\d)(?:-(\d\d))?$/);
+  if(!m){ close(); return; }
+  const p = D.packs.find(x => x.id === m[1]); if(!p) return close();
+  open(p, m[2] ? Math.min(p.variants.length - 1, +m[2] - 1) : 0);
+}
+
+function open(p, k){
+  const v = p.variants[k], pv = $("#pv");
+  if(pv.dataset.id !== v.id){ pv.dataset.id = v.id; pv.poster = v.poster; pv.src = v.video; pv.play().catch(()=>{}); }
+  const cat = D.categories.find(c => c.slug === p.category);
+  const slots = [...new Set(p.variants.flatMap(x => x.slots))].map(s => s.replace("copy.", ""));
+  $("#side").innerHTML = `<div class="k">${cat.en} · ${p.id}</div><div><div class="w">${p.word}</div><h3>${p.title}</h3></div>
+    <p>${esc(p.what.replace(/`/g, "").replace(/\s*\([^)]*\/[^)]*\)/g, ""))}</p>
+    <div><div class="lbl">Variants · ${p.variants.length}</div><div class="vars">${p.variants.map((x, j) => `<button class="${j === k ? 'on' : ''}" data-j="${j}"><img src="${x.poster}" alt="${x.code}"><span>${x.aspect === 'H' ? '4:3' : '9:16'}</span></button>`).join("")}</div></div>
+    <div><div class="lbl">Editable text slots</div><div class="slots">${slots.map(s => `<span>${s}</span>`).join("")}<span>palette</span><span>fonts</span><span>footage</span>${p.category === 'logo_reveals' ? '<span>logo image</span>' : ''}</div></div>
+    <div class="code">${v.code} · id ${v.id} · ${v.aspect === 'H' ? '1440×1080 (4:3 master)' : '1080×1920'} · 15 s · 24 fps · palette ${v.palette}</div>
+    <div class="nav"><button id="prev">← Prev pack</button><button id="next">Next pack →</button></div>`;
+  $$("#side .vars button").forEach(b => b.onclick = () => location.hash = p.id + "-" + String(+b.dataset.j + 1).padStart(2, "0"));
+  $("#prev").onclick = () => location.hash = D.packs[(p.i - 1 + D.packs.length) % D.packs.length].id;
+  $("#next").onclick = () => location.hash = D.packs[(p.i + 1) % D.packs.length].id;
+  $("#ov").classList.add("on"); document.body.style.overflow = "hidden"; state.open = [p, k];
+}
+
+function close(){ $("#ov").classList.remove("on"); document.body.style.overflow = ""; const pv = $("#pv"); pv.pause(); state.open = null; }
+$("#x").onclick = () => history.pushState("", "", location.pathname + location.search) || close();
+$("#ov").onclick = e => { if(e.target.id === "ov"){ history.pushState("", "", location.pathname + location.search); close(); } };
+document.addEventListener("keydown", e => {
+  if(!state.open) return; const [p, k] = state.open;
+  if(e.key === "Escape"){ history.pushState("", "", location.pathname + location.search); close(); }
+  if(e.key === "ArrowRight") location.hash = p.id + "-" + String((k + 1) % p.variants.length + 1).padStart(2, "0");
+  if(e.key === "ArrowLeft") location.hash = p.id + "-" + String((k - 1 + p.variants.length) % p.variants.length + 1).padStart(2, "0");
+  if(e.key === "ArrowDown") location.hash = D.packs[(p.i + 1) % D.packs.length].id;
+  if(e.key === "ArrowUp") location.hash = D.packs[(p.i - 1 + D.packs.length) % D.packs.length].id;
+});
+</script>
+</body>
+</html>

@@ -57,6 +57,9 @@ main{max-width:1560px;margin:0 auto;padding:30px 24px 120px}
 .sech .ru{font-family:"Instrument Serif",serif;font-style:italic;font-size:22px;color:var(--mute)}
 .sech .n{margin-left:auto;font-size:13px;color:var(--mute)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+.tgrid{grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:20px}
+.topc .media{aspect-ratio:4/3}.topc .media img,.topc .media video{object-fit:contain;background:#000}
+.topc .badge{background:var(--acc);color:#111}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s}
 .card:hover{transform:translateY(-3px);border-color:#3c3c46}
 .media{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
@@ -140,7 +143,16 @@ const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAl
 const PAL = {"ink-signal":"#FF5A1F","paper-cobalt":"#2B50FF","moss-cream":"#B8D86B","plum-peach":"#FF9C7A","slate-lime":"#C8FF3D","navy-gold":"#E8B64C","bone-red":"#E0352B","teal-sand":"#5FE0C8","char-pink":"#FF4FA3","sky-ink":"#5AB4FF","clay-white":"#FFB18A","mono-white":"#FFFFFF","violet-mint":"#7CF2C2","rust-cream":"#E2702F","olive-sun":"#FFD23F","steel-cyan":"#00D1FF","wine-blush":"#FF6F8E","forest-coral":"#FF7A5C","sand-black":"#E7DCC8","cobalt-white":"#1838C8","tangerine":"#FF8A00","ice-navy":"#0E66FF","graphite-acid":"#E6FF00","rose-ink":"#E8A0B4"};
 let D, state = {cat:"", asp:"", q:"", mode:"packs"};
 
-fetch("data.json").then(r => r.json()).then(d => { D = d; d.packs.forEach((p, i) => p.i = i); init(); });
+fetch("data.json").then(r => r.json()).then(d => { D = d; rank(); init(); });
+
+function rank(){
+  // best first: packs by judged score, categories by their best pack; p.bi = the pack's strongest variant
+  const s = p => p.score || 0;
+  D.packs.sort((a, b) => s(b) - s(a));
+  D.packs.forEach((p, i) => { p.i = i; p.bi = Math.max(0, p.variants.findIndex(v => v.code === p.best)); });
+  const top = c => Math.max(0, ...D.packs.filter(p => p.category === c.slug).map(s));
+  D.categories.sort((a, b) => top(b) - top(a));
+}
 
 function init(){
   const total = D.packs.reduce((a, p) => a + p.variants.length, 0);
@@ -155,8 +167,8 @@ function init(){
 }
 
 function wall(){
-  // one variant from many packs, shuffled, 3 rows; videos only start when the hero is visible
-  const pick = D.packs.map(p => p.variants[(p.i * 7) % p.variants.length]).sort((a, b) => (a.id * 37 % 101) - (b.id * 37 % 101)).slice(0, 36);
+  // the best variant of the 36 top-ranked packs, 3 rows (strongest in the first); videos only start when the hero is visible
+  const pick = D.packs.slice(0, 36).map(p => p.variants[p.bi]);
   const rows = $$("#wall .row");
   rows.forEach((r, k) => { const items = pick.slice(k * 12, k * 12 + 12); const html = items.map(v => `<div class="t ${v.aspect === 'V' ? 'v' : ''}"><video muted loop playsinline preload="none" poster="${v.poster}" data-src="${v.video}"></video></div>`).join(""); r.innerHTML = html + html; });
   const io = new IntersectionObserver(es => es.forEach(en => { const v = en.target; if(en.isIntersecting){ if(!v.src) v.src = v.dataset.src; v.play().catch(()=>{}); } else v.pause(); }), {rootMargin:"0px"});
@@ -171,8 +183,20 @@ function match(p, v){
   return state.q.split(/\s+/).every(w => hay.includes(w));
 }
 
+function card(p, top){
+  const b = p.variants[p.bi], v = (!state.asp || b.aspect === state.asp) ? b : (p.variants.find(x => x.aspect === state.asp) || b);
+  const asps = [...new Set(p.variants.map(x => x.aspect === "H" ? "4:3" : "9:16"))].join(" + ");
+  const cat = D.categories.find(c => c.slug === p.category);
+  return `<article class="card${top ? ' topc' : ''}" data-p="${p.i}" data-v="${v.video}"><div class="media"><span class="badge">${top ? '#' + (p.i + 1) + ' · ' : ''}${p.id}</span>${top ? `<img loading="lazy" src="${v.poster}" alt="${p.title}"><video class="vid auto" muted loop playsinline preload="none" poster="${v.poster}"></video>` : `<img loading="lazy" src="${p.cover}" alt="${p.title}"><video class="vid" muted loop playsinline preload="none"></video>`}</div>
+    <div class="meta"><div class="w">${top ? cat.en + ' · ' : ''}${p.word}</div><div class="tt">${p.title}</div><div class="row2"><span>${p.variants.length} variants</span>·<span>${asps}</span><span style="margin-left:auto;display:flex;gap:4px">${[...new Set(p.variants.map(x => x.palette))].slice(0, 4).map(k => `<span class="dot" style="background:${PAL[k] || '#888'}"></span>`).join("")}</span></div></div></article>`;
+}
+
 function render(){
   const m = $("#main"); let html = "";
+  if(!state.cat && !state.q && state.mode === "packs"){
+    const per = {}, tp = D.packs.filter(p => (!state.asp || p.variants.some(v => v.aspect === state.asp)) && (per[p.category] = (per[p.category] || 0) + 1) <= 2).slice(0, 12);  // ≤2 per category keeps the top varied
+    html += `<section class="sec" id="top-picks"><div class="sech"><h2>Top picks</h2><span class="ru">самое сильное</span><span class="n">best of 125 packs</span></div><div class="grid tgrid">` + tp.map(p => card(p, true)).join("") + `</div></section>`;
+  }
   for(const c of D.categories){
     if(state.cat && c.slug !== state.cat) continue;
     const packs = D.packs.filter(p => p.category === c.slug);
@@ -180,11 +204,10 @@ function render(){
       const ps = packs.filter(p => match(p) && (!state.asp || p.variants.some(v => v.aspect === state.asp)));
       if(!ps.length) continue;
       html += `<section class="sec" id="cat-${c.slug}"><div class="sech"><h2>${c.en}</h2><span class="ru">${c.ru}</span><span class="n">${ps.length} packs · ${ps.reduce((a, p) => a + p.variants.length, 0)} presets</span></div><div class="grid">` +
-        ps.map(p => { const v = p.variants.find(x => !state.asp || x.aspect === state.asp) || p.variants[0]; const asps = [...new Set(p.variants.map(x => x.aspect === "H" ? "4:3" : "9:16"))].join(" + ");
-          return `<article class="card" data-p="${p.i}" data-v="${v.video}"><div class="media"><span class="badge">${p.id}</span><img loading="lazy" src="${p.cover}" alt="${p.title}"><video class="vid" muted loop playsinline preload="none"></video></div>
-          <div class="meta"><div class="w">${p.word}</div><div class="tt">${p.title}</div><div class="row2"><span>${p.variants.length} variants</span>·<span>${asps}</span><span style="margin-left:auto;display:flex;gap:4px">${[...new Set(p.variants.map(x => x.palette))].slice(0, 4).map(k => `<span class="dot" style="background:${PAL[k] || '#888'}"></span>`).join("")}</span></div></div></article>`; }).join("") + `</div></section>`;
+        ps.map(p => card(p, false)).join("") + `</div></section>`;
     } else {
       const vs = []; packs.forEach(p => p.variants.forEach((v, k) => { if(match(p, v)) vs.push([p, v, k]); }));
+      vs.sort((a, b) => (b[1].score || 0) - (a[1].score || 0) || a[0].i - b[0].i);
       if(!vs.length) continue;
       html += `<section class="sec" id="cat-${c.slug}"><div class="sech"><h2>${c.en}</h2><span class="ru">${c.ru}</span><span class="n">${vs.length} presets</span></div><div class="pgrid">` +
         vs.map(([p, v, k]) => `<article class="pc card ${v.aspect === 'H' ? 'h' : ''}" data-p="${p.i}" data-k="${k}" data-v="${v.video}"><div class="media"><img loading="lazy" src="${v.poster}" alt="${v.code}"><video muted loop playsinline preload="none"></video></div><div class="cap"><b>${v.code}</b>${p.title}</div></article>`).join("") + `</div></section>`;
@@ -195,19 +218,23 @@ function render(){
 }
 
 function hover(){
-  $$("#main .card").forEach(c => {
+  // top picks play on their own while on screen; every other card plays on hover
+  const io = new IntersectionObserver(es => es.forEach(en => { const c = en.target, v = c.querySelector("video");
+    if(en.isIntersecting){ if(!v.src) v.src = c.dataset.v; v.play().then(() => c.classList.add("play")).catch(()=>{}); } else v.pause(); }), {rootMargin:"100px"});
+  $$("#main .card.topc").forEach(c => io.observe(c));
+  $$("#main .card:not(.topc)").forEach(c => {
     const v = c.querySelector("video");
     c.onmouseenter = () => { if(!v.src) v.src = c.dataset.v; v.play().then(() => c.classList.add("play")).catch(()=>{}); };
     c.onmouseleave = () => { v.pause(); c.classList.remove("play"); };
-    c.onclick = () => { const p = D.packs[+c.dataset.p]; location.hash = p.id + (c.dataset.k ? "-" + String(+c.dataset.k + 1).padStart(2, "0") : ""); };
   });
+  $$("#main .card").forEach(c => c.onclick = () => { const p = D.packs[+c.dataset.p]; location.hash = p.id + (c.dataset.k ? "-" + String(+c.dataset.k + 1).padStart(2, "0") : ""); });
 }
 
 function route(){
   const h = decodeURIComponent(location.hash.slice(1)); const m = h.match(/^([A-Z]{2}\d\d)(?:-(\d\d))?$/);
   if(!m){ close(); return; }
   const p = D.packs.find(x => x.id === m[1]); if(!p) return close();
-  open(p, m[2] ? Math.min(p.variants.length - 1, +m[2] - 1) : 0);
+  open(p, m[2] ? Math.min(p.variants.length - 1, +m[2] - 1) : p.bi);
 }
 
 function open(p, k){

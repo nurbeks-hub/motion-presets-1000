@@ -143,7 +143,7 @@ const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAl
 const PAL = {"ink-signal":"#FF5A1F","paper-cobalt":"#2B50FF","moss-cream":"#B8D86B","plum-peach":"#FF9C7A","slate-lime":"#C8FF3D","navy-gold":"#E8B64C","bone-red":"#E0352B","teal-sand":"#5FE0C8","char-pink":"#FF4FA3","sky-ink":"#5AB4FF","clay-white":"#FFB18A","mono-white":"#FFFFFF","violet-mint":"#7CF2C2","rust-cream":"#E2702F","olive-sun":"#FFD23F","steel-cyan":"#00D1FF","wine-blush":"#FF6F8E","forest-coral":"#FF7A5C","sand-black":"#E7DCC8","cobalt-white":"#1838C8","tangerine":"#FF8A00","ice-navy":"#0E66FF","graphite-acid":"#E6FF00","rose-ink":"#E8A0B4"};
 let D, state = {cat:"", asp:"", q:"", mode:"packs"};
 
-fetch("data.json").then(r => r.json()).then(d => { D = d; rank(); init(); });
+fetch("data.json?v=c93a011").then(r => r.json()).then(d => { D = d; rank(); init(); });
 
 function rank(){
   // best first: packs by judged score, categories by their best pack; p.bi = the pack's strongest variant
